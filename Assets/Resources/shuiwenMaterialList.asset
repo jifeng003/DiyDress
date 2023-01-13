@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 813206cf417c876468fff1a1361b9892, type: 3}
+  m_Name: shuiwenMaterialList
+  m_EditorClassIdentifier: 
+  ecaizhi: 5
+  materialList:
+  - material01: {fileID: 2100000, guid: 005b617e01716cf42b4caa028b007567, type: 2}
+    material02: {fileID: 2100000, guid: 4a2c4924c4d7a9a4388c774d387a2cb9, type: 2}
+    sprite: {fileID: 0}
+  - material01: {fileID: 2100000, guid: 9d2975d95b525304f81b7447c4bed9ce, type: 2}
+    material02: {fileID: 2100000, guid: 4a2c4924c4d7a9a4388c774d387a2cb9, type: 2}
+    sprite: {fileID: 0}
+  - material01: {fileID: 2100000, guid: 4a2c4924c4d7a9a4388c774d387a2cb9, type: 2}
+    material02: {fileID: 2100000, guid: 4ce271cf50e249c4c9db965e5ea13255, type: 2}
+    sprite: {fileID: 0}
+  - material01: {fileID: 2100000, guid: 6ab2c077b5fdfb044aeb48fa4ea2d014, type: 2}
+    material02: {fileID: 2100000, guid: 9d2975d95b525304f81b7447c4bed9ce, type: 2}
+    sprite: {fileID: 0}
+  - material01: {fileID: 2100000, guid: 7b2af5641b4999c4fbb785b4cbebcec3, type: 2}
+    material02: {fileID: 2100000, guid: 9d2975d95b525304f81b7447c4bed9ce, type: 2}
+    sprite: {fileID: 0}
+  - material01: {fileID: 2100000, guid: 4ce271cf50e249c4c9db965e5ea13255, type: 2}
+    material02: {fileID: 2100000, guid: 231c2827c21f4d04fae7dd610b3d500e, type: 2}
+    sprite: {fileID: 0}

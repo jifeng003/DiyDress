@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 813206cf417c876468fff1a1361b9892, type: 3}
+  m_Name: piMaterialList
+  m_EditorClassIdentifier: 
+  ecaizhi: 1
+  materialList:
+  - material01: {fileID: 2100000, guid: 2e54d855e293dc848bb7e785a5fd4182, type: 2}
+    material02: {fileID: 2100000, guid: 21b504a591ef1df4787c2769acb83fcd, type: 2}
+    sprite: {fileID: 0}
+  - material01: {fileID: 2100000, guid: 3516a7b67a8fc9c4d938be86d9b417c6, type: 2}
+    material02: {fileID: 2100000, guid: 21b504a591ef1df4787c2769acb83fcd, type: 2}
+    sprite: {fileID: 0}
+  - material01: {fileID: 2100000, guid: 21b504a591ef1df4787c2769acb83fcd, type: 2}
+    material02: {fileID: 2100000, guid: 2a52e7b701118ce4fb1f70a5d591af7c, type: 2}
+    sprite: {fileID: 0}
+  - material01: {fileID: 2100000, guid: 069a27093c0cb5c429cd2397f1146cd3, type: 2}
+    material02: {fileID: 2100000, guid: 3516a7b67a8fc9c4d938be86d9b417c6, type: 2}
+    sprite: {fileID: 0}
+  - material01: {fileID: 2100000, guid: a7b2d13466c5ec2429b92e5d04412982, type: 2}
+    material02: {fileID: 2100000, guid: 3516a7b67a8fc9c4d938be86d9b417c6, type: 2}
+    sprite: {fileID: 0}
+  - material01: {fileID: 2100000, guid: 2a52e7b701118ce4fb1f70a5d591af7c, type: 2}
+    material02: {fileID: 2100000, guid: 231c2827c21f4d04fae7dd610b3d500e, type: 2}
+    sprite: {fileID: 0}

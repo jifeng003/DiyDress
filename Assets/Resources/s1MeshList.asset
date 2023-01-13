@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f4d85616e0372648adbefccc41aeab0, type: 3}
+  m_Name: s1MeshList
+  m_EditorClassIdentifier: 
+  materialList:
+  - sprite: {fileID: 21300000, guid: e0888f4360aa24946b6da9703914f9d3, type: 3}
+    isHomochromy: 1
+    isUnlock: 0
+  - sprite: {fileID: 21300000, guid: ff26cccc41e9ba94c9880459ebc51147, type: 3}
+    isHomochromy: 1
+    isUnlock: 0
+  - sprite: {fileID: 21300000, guid: ffc8f8047410f824d8a6ae93e75fb712, type: 3}
+    isHomochromy: 0
+    isUnlock: 0
+  - sprite: {fileID: 21300000, guid: 145d142432ed99d499efb69a2530a39b, type: 3}
+    isHomochromy: 0
+    isUnlock: 0
+  - sprite: {fileID: 21300000, guid: 1e540c26b54080a47b203b510700d5e1, type: 3}
+    isHomochromy: 0
+    isUnlock: 0
+  - sprite: {fileID: 21300000, guid: 865065e2ebd5b9345a0da26108c72553, type: 3}
+    isHomochromy: 0
+    isUnlock: 0
+  - sprite: {fileID: 21300000, guid: 3974713ce8bb93d4992a68f170f56c11, type: 3}
+    isHomochromy: 0
+    isUnlock: 0
+  - sprite: {fileID: 21300000, guid: 299cd39b70070654890c92e671106b4b, type: 3}
+    isHomochromy: 0
+    isUnlock: 0
+  - sprite: {fileID: 21300000, guid: bf03efc8445c1d44a8360a50f2509f36, type: 3}
+    isHomochromy: 0
+    isUnlock: 0
+  - sprite: {fileID: 21300000, guid: 9557756f15584d346b9274084f9dd940, type: 3}
+    isHomochromy: 0
+    isUnlock: 0

@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f53e3f3337d37df42b23bc9086b3ebec, type: 3}
+  m_Name: SizeLevelList
+  m_EditorClassIdentifier: 
+  SizelevelList:
+  - LevelNumber: 0
+    neiyiClolor:
+    - {fileID: 2100000, guid: ed61cc14db5214349a7410182a812b50, type: 2}
+    - {fileID: 2100000, guid: 3516a7b67a8fc9c4d938be86d9b417c6, type: 2}
+    xieClolr:
+    - {fileID: 2100000, guid: ed61cc14db5214349a7410182a812b50, type: 2}
+    - {fileID: 2100000, guid: b5109777041cbfa439ba95abfbe28c51, type: 2}
+    TitleNumber: 020000000400000006000000
+  - LevelNumber: 5
+    neiyiClolor:
+    - {fileID: 2100000, guid: 820ac93e38ebe244d8103d531a5c145d, type: 2}
+    - {fileID: 2100000, guid: 3516a7b67a8fc9c4d938be86d9b417c6, type: 2}
+    xieClolr:
+    - {fileID: 2100000, guid: 820ac93e38ebe244d8103d531a5c145d, type: 2}
+    - {fileID: 2100000, guid: b5109777041cbfa439ba95abfbe28c51, type: 2}
+    TitleNumber: 00000000020000000400000006000000
+  - LevelNumber: 10
+    neiyiClolor:
+    - {fileID: 2100000, guid: 17a29da44c6f59741830c609dafe53c9, type: 2}
+    - {fileID: 2100000, guid: 3516a7b67a8fc9c4d938be86d9b417c6, type: 2}
+    - {fileID: 2100000, guid: 3516a7b67a8fc9c4d938be86d9b417c6, type: 2}
+    xieClolr:
+    - {fileID: 2100000, guid: 17a29da44c6f59741830c609dafe53c9, type: 2}
+    - {fileID: 2100000, guid: b5109777041cbfa439ba95abfbe28c51, type: 2}
+    TitleNumber: 0000000002000000040000000500000006000000
+  - LevelNumber: 15
+    neiyiClolor:
+    - {fileID: 2100000, guid: fcbc2fbcb6b378941a4e63c6fbca6b3a, type: 2}
+    - {fileID: 2100000, guid: 36b9466946d45f940815c21f6b410d4b, type: 2}
+    - {fileID: 2100000, guid: 36b9466946d45f940815c21f6b410d4b, type: 2}
+    xieClolr:
+    - {fileID: 2100000, guid: fcbc2fbcb6b378941a4e63c6fbca6b3a, type: 2}
+    - {fileID: 2100000, guid: b5109777041cbfa439ba95abfbe28c51, type: 2}
+    TitleNumber: 000000000200000004000000050000000600000008000000

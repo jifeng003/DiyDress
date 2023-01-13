@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 813206cf417c876468fff1a1361b9892, type: 3}
+  m_Name: ZhazhenMaterialList
+  m_EditorClassIdentifier: 
+  ecaizhi: 7
+  materialList:
+  - material01: {fileID: 2100000, guid: 9a88479acd1802a47843c52ea233f463, type: 2}
+    material02: {fileID: 2100000, guid: 8b3140760a43e4e4ead194eea1de34d5, type: 2}
+  - material01: {fileID: 2100000, guid: 5fa173cb992f017489fe9f7db34b7492, type: 2}
+    material02: {fileID: 2100000, guid: 8b3140760a43e4e4ead194eea1de34d5, type: 2}
+  - material01: {fileID: 2100000, guid: 8b3140760a43e4e4ead194eea1de34d5, type: 2}
+    material02: {fileID: 2100000, guid: f00815936b2f4dc4ea778c04d53e3271, type: 2}
+  - material01: {fileID: 2100000, guid: 136c914a221991b4f855afa9b9b31c89, type: 2}
+    material02: {fileID: 2100000, guid: 5fa173cb992f017489fe9f7db34b7492, type: 2}
+  - material01: {fileID: 2100000, guid: b8e34373bf87b8f479e6e7c613a63bc1, type: 2}
+    material02: {fileID: 2100000, guid: 5fa173cb992f017489fe9f7db34b7492, type: 2}
+  - material01: {fileID: 2100000, guid: f00815936b2f4dc4ea778c04d53e3271, type: 2}
+    material02: {fileID: 2100000, guid: e4e34f3881d50524189db916128f22ca, type: 2}

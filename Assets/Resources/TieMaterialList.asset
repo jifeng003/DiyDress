@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 813206cf417c876468fff1a1361b9892, type: 3}
+  m_Name: TieMaterialList
+  m_EditorClassIdentifier: 
+  ecaizhi: 7
+  materialList:
+  - material01: {fileID: 2100000, guid: b2fc070059d89084492b39e88b7250c0, type: 2}
+    material02: {fileID: 2100000, guid: b2fc070059d89084492b39e88b7250c0, type: 2}
+  - material01: {fileID: 2100000, guid: 820ac93e38ebe244d8103d531a5c145d, type: 2}
+    material02: {fileID: 2100000, guid: 820ac93e38ebe244d8103d531a5c145d, type: 2}
+  - material01: {fileID: 2100000, guid: e8adeac6ef586cc4b8753539352480cf, type: 2}
+    material02: {fileID: 2100000, guid: b824e7da9d043084a83e72cfd56e143b, type: 2}
+  - material01: {fileID: 2100000, guid: 8f2ad7c8c57714e47b5d2289a636f60e, type: 2}
+    material02: {fileID: 2100000, guid: 8f2ad7c8c57714e47b5d2289a636f60e, type: 2}

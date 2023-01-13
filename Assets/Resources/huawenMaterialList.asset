@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 813206cf417c876468fff1a1361b9892, type: 3}
+  m_Name: huawenMaterialList
+  m_EditorClassIdentifier: 
+  ecaizhi: 0
+  materialList:
+  - material01: {fileID: 2100000, guid: 22f108336dc22fd48899330664701749, type: 2}
+    material02: {fileID: 2100000, guid: 864c653b4ef130f4e8f44dbe2bea3fc2, type: 2}
+    sprite: {fileID: 0}
+  - material01: {fileID: 2100000, guid: d3d0c02f202c5114e9ce86b6caf0d3f6, type: 2}
+    material02: {fileID: 2100000, guid: 864c653b4ef130f4e8f44dbe2bea3fc2, type: 2}
+    sprite: {fileID: 0}
+  - material01: {fileID: 2100000, guid: 864c653b4ef130f4e8f44dbe2bea3fc2, type: 2}
+    material02: {fileID: 2100000, guid: 8f09465dfeaae534f90783c0ae999f60, type: 2}
+    sprite: {fileID: 0}
+  - material01: {fileID: 2100000, guid: 8f09465dfeaae534f90783c0ae999f60, type: 2}
+    material02: {fileID: 2100000, guid: d3d0c02f202c5114e9ce86b6caf0d3f6, type: 2}
+    sprite: {fileID: 0}
+  - material01: {fileID: 2100000, guid: 1d626a37f49821b469ad26509a1989ef, type: 2}
+    material02: {fileID: 2100000, guid: d3d0c02f202c5114e9ce86b6caf0d3f6, type: 2}
+    sprite: {fileID: 0}
+  - material01: {fileID: 2100000, guid: ede2291e064643d49925778f5d008ed4, type: 2}
+    material02: {fileID: 2100000, guid: 231c2827c21f4d04fae7dd610b3d500e, type: 2}
+    sprite: {fileID: 0}

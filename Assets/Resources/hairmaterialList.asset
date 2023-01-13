@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 813206cf417c876468fff1a1361b9892, type: 3}
+  m_Name: hairmaterialList
+  m_EditorClassIdentifier: 
+  ecaizhi: 0
+  materialList:
+  - material01: {fileID: 2100000, guid: 5405e6682873c5d4295120ab4140fd49, type: 2}
+    material02: {fileID: 0}
+    sprite: {fileID: 0}
+  - material01: {fileID: 2100000, guid: 77dbfc275de3e5c47bfaaa5623326077, type: 2}
+    material02: {fileID: 0}
+    sprite: {fileID: 0}
+  - material01: {fileID: 2100000, guid: 950a937d3193f68408cd99c5fe96266f, type: 2}
+    material02: {fileID: 0}
+    sprite: {fileID: 0}
+  - material01: {fileID: 2100000, guid: 88c45da091b8c744ea0b316dc2829607, type: 2}
+    material02: {fileID: 0}
+    sprite: {fileID: 0}
+  - material01: {fileID: 2100000, guid: afe99621bce93eb458184ca004a735e9, type: 2}
+    material02: {fileID: 0}
+    sprite: {fileID: 0}
+  - material01: {fileID: 2100000, guid: ca8eeb7481c8e274ea1b7cb928926f5b, type: 2}
+    material02: {fileID: 0}
+    sprite: {fileID: 0}

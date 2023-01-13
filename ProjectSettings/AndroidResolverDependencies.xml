@@ -1,0 +1,28 @@
+<dependencies>
+  <packages>
+    <package>com.tabtale.tt_plugins.android:TT_Plugins_Analytics:0.0.0.0.464</package>
+    <package>com.tabtale.tt_plugins.android:TT_Plugins_AppsFlyer:0.0.0.0.186</package>
+    <package>com.tabtale.tt_plugins.android:TT_Plugins_Core:4.1.0.0.1</package>
+    <package>com.tabtale.tt_plugins.android:TT_Plugins_CrashTool:0.0.0.0.62</package>
+    <package>com.tabtale.tt_plugins.android:TT_Plugins_FirebaseAgent:0.0.0.0.464</package>
+    <package>com.tabtale.tt_plugins.android:TT_Plugins_Privacy_Settings:0.0.0.0.437</package>
+    <package>com.tabtale.tt_plugins.android:TT_Plugins_Remote_Config:0.0.0.0.43</package>
+    <package>com.tabtale.tt_plugins.android:TT_Plugins_Unity:3.8.0.0.1</package>
+  </packages>
+  <files />
+  <settings>
+    <setting name="androidAbis" value="arm64-v8a,armeabi-v7a" />
+    <setting name="bundleId" value="com.zhiming.diydress" />
+    <setting name="explodeAars" value="True" />
+    <setting name="gradleBuildEnabled" value="True" />
+    <setting name="gradlePropertiesTemplateEnabled" value="False" />
+    <setting name="gradleTemplateEnabled" value="True" />
+    <setting name="installAndroidPackages" value="True" />
+    <setting name="localMavenRepoDir" value="Assets/GeneratedLocalRepo" />
+    <setting name="packageDir" value="Assets/Plugins/Android" />
+    <setting name="patchAndroidManifest" value="True" />
+    <setting name="patchMainTemplateGradle" value="True" />
+    <setting name="projectExportEnabled" value="False" />
+    <setting name="useJetifier" value="True" />
+  </settings>
+</dependencies>

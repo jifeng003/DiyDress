@@ -142,7 +142,6 @@ namespace Tabtale.TTPlugins
         /// <param name="action">Callback for closed view action</param>
         public static void ShowPrivacySettings(System.Action action)
         {
-            TTPLogger.Log("TTPPrivacySettings::ShowPrivacySettings:");
             _onPrivacySettingsClosedAction = action;
             if (Impl != null)
                 Impl.ShowPrivacySettings();
@@ -154,7 +153,6 @@ namespace Tabtale.TTPlugins
         /// </summary>
         public static void ForgetUser()
         {
-            TTPLogger.Log("TTPPrivacySettings::ForgetUser:");
             if (Impl != null)
                 Impl.ForgetUser();
         }
@@ -165,7 +163,6 @@ namespace Tabtale.TTPlugins
         /// <param name="age">Integer user age</param>
         public static void SetAge(int age)
         {
-            TTPLogger.Log("TTPPrivacySettings::SetAge:");
             if (Impl != null)
                 Impl.SetAge(age);
         }
@@ -178,7 +175,6 @@ namespace Tabtale.TTPlugins
         /// <see cref="ConsentType"/>
         public static void CustomConsentSetConsent(ConsentType consentType)
         {
-            TTPLogger.Log("TTPPrivacySettings::CustomConsentSetConsent:");
             if (Impl != null)
                 Impl.SetConsent(consentType);
         }
@@ -190,7 +186,6 @@ namespace Tabtale.TTPlugins
         /// <see cref="ConsentType"/>see
         public static ConsentType CustomConsentGetConsent()
         {
-            TTPLogger.Log("TTPPrivacySettings::CustomConsentGetConsent:");
             if (Impl != null)
                 return Impl.GetConsent();
             return ConsentType.UNKNOWN;
@@ -202,7 +197,6 @@ namespace Tabtale.TTPlugins
         /// <returns>True - if the app should show age gate</returns>
         public static bool ShouldShowAgeGate()
         {
-            TTPLogger.Log("TTPPrivacySettings::ShouldShowAgeGate:");
             if (Impl != null)
                 return Impl.ShouldShowAgeGate();
             return false;
@@ -214,7 +208,6 @@ namespace Tabtale.TTPlugins
         /// <returns>True - if it's CCPA jurisdiction</returns>
         public static bool IsCcpaJurisdiction()
         {
-            TTPLogger.Log("TTPPrivacySettings::IsCcpaJurisdiction:");
             if (Impl != null)
                 return Impl.IsCcpaJurisdiction();
             return false;

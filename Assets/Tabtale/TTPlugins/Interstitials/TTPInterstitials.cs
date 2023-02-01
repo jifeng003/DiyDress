@@ -37,7 +37,6 @@ namespace Tabtale.TTPlugins
         
         public static bool ShowWithILRD(string location, System.Action<TTPILRDData> onContinueAction)
         {
-            TTPLogger.Log("TTPInterstitials::ShowWithILRD:location=" + location);
             _onContinueActionILRD = onContinueAction;
             if(Impl != null)
             {
@@ -61,7 +60,6 @@ namespace Tabtale.TTPlugins
         /// <returns>True - if plugin is implemented</returns>
         public static bool Show(Locations location, System.Action onContinueAction)
         {
-            TTPLogger.Log("TTPInterstitials::Show:");
             _onContinueAction = onContinueAction;
             if (Impl != null)
             {
@@ -86,7 +84,6 @@ namespace Tabtale.TTPlugins
         [System.Obsolete("Use Show with enum Locations")]
         public static bool Show(string location, System.Action onContinueAction)
         {
-            TTPLogger.Log("TTPInterstitials::Show:location=" + location);
             _onContinueAction = onContinueAction;
             if (Impl != null)
             {
@@ -110,7 +107,6 @@ namespace Tabtale.TTPlugins
         [Obsolete("Please call Show(location) directly. There is no need to be check the readiness of interstitials.", false)]
         public static bool IsReady()
         {
-            TTPLogger.Log("TTPInterstitials::IsReady:");
             if (Impl != null)
             {
                 return Impl.IsReady();

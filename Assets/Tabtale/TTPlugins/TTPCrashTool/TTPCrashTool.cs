@@ -61,7 +61,6 @@ namespace Tabtale.TTPlugins
         /// <param name="crumb">Information useful for crash report</param>
         public static void AddBreadCrumb(string crumb)
         {
-            TTPLogger.Log("TTPCrashTool::AddBreadCrumb:crumb=" + crumb);
             if (Impl != null)
                 Impl.AddBreadCrumb(crumb);
         }
@@ -70,7 +69,6 @@ namespace Tabtale.TTPlugins
         /// </summary>
         public static void ClearAllBreadCrumbs()
         {
-            TTPLogger.Log("TTPCrashTool::ClearAllBreadCrumbs:");
             if (Impl != null)
                 Impl.ClearAllBreadCrumbs();
         }

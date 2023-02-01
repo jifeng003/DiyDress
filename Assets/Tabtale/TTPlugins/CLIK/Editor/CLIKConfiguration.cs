@@ -5,17 +5,24 @@ using System.IO;
 using System.Linq;
 using System.Xml;
 using Google;
+using GooglePlayServices;
+using Google;
 using Tabtale.TTPlugins;
 using TTPlugins.DependenciesFile;
 using TTPlugins.PomFile;
 using UnityEditor;
 using UnityEditor.Android;
+using UnityEditor.AnimatedValues;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 #if UNITY_IOS
 using UnityEditor.iOS.Xcode;
 #endif
 using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.UI;
+using Object = System.Object;
+using System.Text.RegularExpressions;
 
 // ReSharper disable InconsistentNaming
 
@@ -202,7 +209,6 @@ public class CLIKConfiguration : EditorWindow
         AddSymbol("TTP_DEV_MODE");
         ToggleMetaFiles(false);
         ChangeManifestStatus(false);
-        AddShareToDependencies();
     }
     
     [MenuItem("CLIK/Developer Mode/Set Developer Mode On", true)]
@@ -217,7 +223,6 @@ public class CLIKConfiguration : EditorWindow
         RemoveSymbol("TTP_DEV_MODE");
         ToggleMetaFiles(true);
         ChangeManifestStatus(true);
-        RemoveShareFromDependencies();
     }
     
     [MenuItem("CLIK/Developer Mode/Set Developer Mode Off", true)]
@@ -266,11 +271,6 @@ public class CLIKConfiguration : EditorWindow
         bool needToSaveAssets = false;
         foreach (DirectoryInfo directoryInfo in info.GetDirectories())
         {
-            if (directoryInfo.ToString().EndsWith("Share"))
-            {
-                Debug.Log("skipping folder " + directoryInfo);
-                continue;
-            }
             string iosPluginsPath = Path.Combine(Path.Combine(directoryInfo.ToString(), "Plugins"), "iOS");
             if (Directory.Exists(iosPluginsPath))
             {
@@ -283,7 +283,7 @@ public class CLIKConfiguration : EditorWindow
                         needToSaveAssets = true;
                         string relativePath = file.ToString().Replace(Application.dataPath, "Assets");
                         Debug.Log(relativePath);
-                        UpdateCompatiblePlatform(relativePath, shouldInclude);
+                        UpdateCompatiblePlatfrom(relativePath, shouldInclude);
                     }
                 }
             }
@@ -297,7 +297,7 @@ public class CLIKConfiguration : EditorWindow
             {
                 Debug.Log(pathToFile);
                 needToSaveAssets = true;
-                UpdateCompatiblePlatform(pathToFile, shouldInclude);
+                UpdateCompatiblePlatfrom(pathToFile, shouldInclude);
             }
         }
         
@@ -312,7 +312,6 @@ public class CLIKConfiguration : EditorWindow
         Debug.Log("CLIKConfiguration::ChangeManifestStatus:useManifest=" + useManifest);
         if (useManifest)
         {
-            Debug.Log("CLIKConfiguration::ChangeManifestStatus:manifest backup exists=" + File.Exists(Constants.ANDROID_MANIFEST_FILE_PATH_BACKUP));
             if (File.Exists(Constants.ANDROID_MANIFEST_FILE_PATH_BACKUP))
             {
                 File.Move(Constants.ANDROID_MANIFEST_FILE_PATH_BACKUP, Constants.ANDROID_MANIFEST_FILE_PATH);
@@ -321,7 +320,6 @@ public class CLIKConfiguration : EditorWindow
         }
         else
         {
-            Debug.Log("CLIKConfiguration::ChangeManifestStatus:manifest exists=" + File.Exists(Constants.ANDROID_MANIFEST_FILE_PATH));
             if (File.Exists(Constants.ANDROID_MANIFEST_FILE_PATH))
             {
                 File.Move(Constants.ANDROID_MANIFEST_FILE_PATH, Constants.ANDROID_MANIFEST_FILE_PATH_BACKUP);
@@ -329,65 +327,8 @@ public class CLIKConfiguration : EditorWindow
             }
         }
     }
-
-    private static void AddShareToDependencies()
-    {
-        var pomData = PomFile.DeserializeFromFile(pomPath);
-        Debug.Log("AddShareToDependencies:: pomData = " + pomData);
-        var depsFile = DependenciesFile.DeserializeFromFile(depsPath);
-        var artifacts = pomData.PomDependencies.Dependencies;
-        
-        depsFile.AndroidPackages = depsFile.AndroidPackages ?? new AndroidPackages();
-        var artifactList = depsFile.AndroidPackages.AndroidPackage;
-        
-        var artifact = artifacts.FirstOrDefault(p => p.ArtifactId.Equals("TT_Plugins_Share"));
-        if (artifact != null)
-        {
-            var package = new AndroidPackage
-            {
-                Spec = $"{artifact.GroupId}:{artifact.ArtifactId}:{artifact.Version}"
-            };
-            Debug.Log("AddShareToDependencies::Found artifact:" + package.Spec);
-            artifactList.Add(package);
-        }
-        else
-        {
-            Debug.Log("AddShareToDependencies::Can\'t find artifact:TT_Plugins_Share");
-        }
-        
-        depsFile.AndroidPackages.AndroidPackage = artifactList;
-        depsFile.SerializeToFile();
-    }
     
-    private static void RemoveShareFromDependencies()
-    {
-        var pomData = PomFile.DeserializeFromFile(pomPath);
-        Debug.Log("RemoveShareFromDependencies:: pomData = " + pomData);
-        var depsFile = DependenciesFile.DeserializeFromFile(depsPath);
-        var artifacts = pomData.PomDependencies.Dependencies;
-
-        if (depsFile.AndroidPackages == null)
-        {
-            Debug.Log("RemoveShareFromDependencies:: no android packages added");
-            return;
-        }
-        
-        var artifactList = depsFile.AndroidPackages.AndroidPackage;
-        foreach (var androidPackage in artifactList)
-        {
-            if (androidPackage.Spec.Contains("TT_Plugins_Share"))
-            {
-                Debug.Log("RemoveShareFromDependencies::TT_Plugins_Share has removed");
-                artifactList.Remove(androidPackage);
-                break;
-            }
-        }
-        
-        depsFile.AndroidPackages.AndroidPackage = artifactList;
-        depsFile.SerializeToFile();
-    }
-    
-    private static void UpdateCompatiblePlatform(string relativePath, bool shouldInclude)
+    private static void UpdateCompatiblePlatfrom(string relativePath, bool shouldInclude)
     {
         PluginImporter pi = AssetImporter.GetAtPath(relativePath) as PluginImporter;
         pi.ClearSettings();
@@ -412,28 +353,6 @@ public class CLIKConfiguration : EditorWindow
         return false;
     }
 
-    public static bool IsAndroid()
-    {
-        var isAndroid = EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android;
-        return isAndroid;
-    }
-
-    public static bool IsPlatformSpecified()
-    {
-        return !string.IsNullOrEmpty(_configuration.globalConfig.store);
-    }
-
-    public static bool IsInvalidPlatform()
-    {
-        var result = false;
-        if (IsPlatformSpecified())
-        {
-            result = ((IsAndroid() && _configuration.globalConfig.store != "google") ||
-                      (!IsAndroid() && _configuration.globalConfig.store != "apple"));
-        }
-        return result;
-    }
-
     string newInAppId = "";
     string newInAppIapId = "";
     int newInAppType = 0;
@@ -443,9 +362,10 @@ public class CLIKConfiguration : EditorWindow
     private void OnGUI()
     {
         EditorGUILayout.Space();
+        var isAndroid = EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android;
         GUILayout.Label("Mode: " + (_configuration.globalConfig.testMode ? "Test" : "Production"));
         var currentId =
-            PlayerSettings.GetApplicationIdentifier(IsAndroid() ? BuildTargetGroup.Android : BuildTargetGroup.iOS);
+            PlayerSettings.GetApplicationIdentifier(isAndroid ? BuildTargetGroup.Android : BuildTargetGroup.iOS);
         if (CompareVersion() < 0)
             GUILayout.Label(
                 $"Current Unity version ({Application.unityVersion}) is lower than required ({Constants.REQUIRED_UNITY_VERSION})",
@@ -456,12 +376,13 @@ public class CLIKConfiguration : EditorWindow
                 _redLabel);
             if (GUILayout.Button("Change Application Id"))
             {
-                PlayerSettings.SetApplicationIdentifier(IsAndroid() ? BuildTargetGroup.Android : BuildTargetGroup.iOS,
+                PlayerSettings.SetApplicationIdentifier(isAndroid ? BuildTargetGroup.Android : BuildTargetGroup.iOS,
                     _configuration.globalConfig.bundleId);
             }
         }
 
-        if (IsInvalidPlatform())
+        if ((isAndroid && _configuration.globalConfig.store != "google") ||
+            (!isAndroid && _configuration.globalConfig.store != "apple"))
         {
             GUILayout.Label("Configuration does not match current build target!", _redLabel);
         }
@@ -1624,9 +1545,6 @@ public class CLIKConfiguration : EditorWindow
             }
         }
 
-#if TTP_DEV_MODE
-        services.Add("TT_Plugins_Share");
-#endif
         var pomData = PomFile.DeserializeFromFile(pomPath);
         Debug.Log("CreateJarDependencies:: pomData = " + pomData);
         var depsFile = DependenciesFile.DeserializeFromFile(depsPath);
@@ -1908,11 +1826,12 @@ public class CLIKConfiguration : EditorWindow
             serverDomain = "http://" + serverDomain;
         }
 
-        var store = IsAndroid() ? "google" : "apple";
+        var isAndroid = EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android;
+        var store = isAndroid ? "google" : "apple";
         var url = (serverDomain ?? "http://dashboard.ttpsdk.info") + "/clik-packages/" + store + "/" + bundleId;
         Debug.Log("BuilderDetermineIncludedServices::url=" + url);
         string resStr = null;
-        if (!IsAndroid())
+        if (!isAndroid)
         {
             IOSResolver.PodToolExecutionViaShellEnabled = false;
         }
@@ -1970,31 +1889,12 @@ public class CLIKConfiguration : EditorWindow
                     SaveInclusionScriptableObject(includedServices);
                     if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android)
                     {
-                        RemoveAndroidDependenciesResolverXml();
                         ProcessGradleTemplatesFiles();
                         CreateJarDependencies(_configuration.globalConfig.isAdMob, _configuration.analyticsConfig.firebaseEchoMode);
                     }
                 }
             }
         }
-    }
-
-    private static void RemoveAndroidDependenciesResolverXml()
-    {
-        var pathToAndroidResolverDependenciesXml = TTPUtils.CombinePaths(new List<string>()
-        {
-            Application.dataPath,
-            "..",
-            "ProjectSettings",
-            "AndroidResolverDependencies.xml"
-        });
-        
-        if (File.Exists(pathToAndroidResolverDependenciesXml))
-        {
-            Debug.Log("Removing " + pathToAndroidResolverDependenciesXml);
-            File.Delete(pathToAndroidResolverDependenciesXml);
-        }
-        
     }
 
     private class AndroidGradlePreprocess : IPostGenerateGradleAndroidProject
@@ -2009,7 +1909,7 @@ public class CLIKConfiguration : EditorWindow
             var ttpVersion = File.ReadAllText("Assets/Tabtale/TTPlugins/version.txt");
             var ttpVersionGradleProperty = "ttp_version=" + ttpVersion ?? "null";
             var gradleClassPath = "3.4.3";
-#if UNITY_2020_3_OR_NEWER
+#if UNITY_2021_3_OR_NEWER
             gradleClassPath = "4.0.1";
 #elif UNITY_2020_1_OR_NEWER
             gradleClassPath = "3.6.4";
@@ -2054,60 +1954,8 @@ public class CLIKConfiguration : EditorWindow
             gradleLines.Insert(indexOfGradleDependencies+1,androidConfiguration);
             File.WriteAllLines(buildGradlePath, gradleLines);
             
-#if UNITY_2020_3
-            if (PlayerSettings.Android.targetSdkVersion > AndroidSdkVersions.AndroidApiLevel30)
-            {
-                UpdateGradleForAndroidTarget31(path);
-            }
-#endif
-            
             string pathToModuleAndroidManifest = TTPUtils.CombinePaths(new List<string> {path, "src", "main", "AndroidManifest.xml"});
             FixManifest(pathToModuleAndroidManifest);
-        }
-
-        private static void ReplaceBuildToolsVersion(string buildGradlePath)
-        {
-            Debug.Log("OnPostGenerateGradleAndroidProject::ReplaceBuildToolsVersion:buildGradlePath=" + buildGradlePath);
-            if (!File.Exists(buildGradlePath))
-            {
-                Debug.Log("OnPostGenerateGradleAndroidProject::ReplaceBuildToolsVersion:gradle doesn't exist");
-                return;
-            }
-
-            Boolean rewriteFile = false;
-            var gradleLines = File.ReadLines(buildGradlePath).ToList();
-            for (int i = 0; i < gradleLines.Count; i++)
-            {
-                string currentLine = gradleLines[i];
-                if (currentLine.Contains("buildToolsVersion"))
-                {
-                    Debug.Log("OnPostGenerateGradleAndroidProject::ReplaceBuildToolsVersion:" + currentLine);
-                    if (!currentLine.Contains("30.0.3"))
-                    {
-                        currentLine = "buildToolsVersion '30.0.3'";
-                        gradleLines[i] = currentLine;
-                        rewriteFile = true;    
-                    }
-                    break;
-                }
-            }
-
-            if (rewriteFile)
-            {
-                File.WriteAllLines(buildGradlePath, gradleLines);
-                Debug.Log("OnPostGenerateGradleAndroidProject::ReplaceBuildToolsVersion:buildToolsVersion has fixed");
-            }
-        }
-        
-        private static void UpdateGradleForAndroidTarget31(string path)
-        {
-            Debug.Log("OnPostGenerateGradleAndroidProject::UpdateGradleForAndroidTarget31:path=" + path);
-            var buildGradlePath = Path.Combine(path, "build.gradle");
-            ReplaceBuildToolsVersion(buildGradlePath);
-            buildGradlePath = Path.Combine(path, Path.Combine("AndroidConfigurations.androidlib", "build.gradle"));
-            ReplaceBuildToolsVersion(buildGradlePath);
-            buildGradlePath = Path.Combine(path, Path.Combine("..", Path.Combine("launcher", "build.gradle")));
-            ReplaceBuildToolsVersion(buildGradlePath);
         }
 
         private static void FixManifest(string pathToManifest)

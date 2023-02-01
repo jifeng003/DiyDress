@@ -8,8 +8,15 @@ namespace SXM
 {
     public class TTPGame_SDK : MonoBehaviour
     {
-        
-        
+        private bool isSdkIns;
+        private void Awake()
+        {
+            // Initialize CLIK Plugin   
+            TTPCore.Setup(); //放在首行
+            isSdkIns = true;
+            Debug.Log("SDK初始化");
+            // Your code here
+        }
 
         private Dictionary<string,object> parameters;
         
@@ -18,6 +25,8 @@ namespace SXM
         /// </summary>
         public void OnMissionStarted(int levelId)
         {
+            if (!isSdkIns) return;
+        
             Debug.Log("开始游戏");
             parameters  = new Dictionary<string, object>();
 
@@ -36,6 +45,8 @@ namespace SXM
         /// </summary>
         public  void OnMissionComplete()
         {
+            if (!isSdkIns) return;
+
             Debug.Log("游戏成功");
 
             TTPGameProgression.FirebaseEvents.MissionComplete(parameters);
@@ -47,7 +58,8 @@ namespace SXM
         /// </summary>
         public  void OnMissionFailed()
         {
-            
+            if (!isSdkIns) return;
+
             TTPGameProgression.FirebaseEvents.MissionFailed(parameters);//游戏失败
         }
     }

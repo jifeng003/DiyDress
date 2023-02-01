@@ -42,7 +42,6 @@ namespace Tabtale.TTPlugins
         /// <returns>True - if plugin is implemented</returns>
         public static bool ShowWithILRD(string location, System.Action<bool, TTPILRDData> onResultAction)
         {
-            TTPLogger.Log("TTPRewardedAds::ShowWithILRD:location=" + location);
             _onResultActionILRD = onResultAction;
             _onResultAction = null;
             if (Impl != null)
@@ -67,7 +66,6 @@ namespace Tabtale.TTPlugins
         /// <returns>True - if plugin is implemented</returns>
         public static bool Show(string location, System.Action<bool> onResultAction)
         {
-            TTPLogger.Log("TTPRewardedAds::Show:location=" + location);
             _onResultAction = onResultAction;
             _onResultActionILRD = null;
             if (Impl != null)
@@ -91,7 +89,6 @@ namespace Tabtale.TTPlugins
         /// <returns>True - rewarded ads are ready</returns>
         public static bool IsReady()
         {
-            TTPLogger.Log("TTPRewardedAds::IsReady:");
             if (Impl != null)
             {
                 return Impl.IsReady();

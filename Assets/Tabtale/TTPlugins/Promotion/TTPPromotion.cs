@@ -21,7 +21,6 @@ namespace Tabtale.TTPlugins
 
         public static bool ShowStand(string location, System.Action onContinueAction)
         {
-            TTPLogger.Log("TTPPromotion::ShowStand:location=" + location);
             _onContinueAction = onContinueAction;
             if (Impl != null)
             {
@@ -39,7 +38,6 @@ namespace Tabtale.TTPlugins
 
         public static bool IsReady()
         {
-            TTPLogger.Log("TTPPromotion::IsReady:");
             if (Impl != null)
             {
                 return Impl.IsReady();

@@ -1,4 +1,4 @@
-#if TTP_GAMEPROGRESSION
+﻿#if TTP_GAMEPROGRESSION
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,7 +41,6 @@ namespace Tabtale.TTPlugins
         /// <param name="additionalParams">Other additional parameters of current step</param>
         public static void TutorialStep(bool isMandatory, int tutorialStepID, string tutorialName, string tutorialStepName, Dictionary<string, object> additionalParams)
         {
-            TTPLogger.Log("TTPGameProgression::TutorialStep:");
             CallAnalyticsByReflection("TutorialStep", new object[] { isMandatory, tutorialStepID, tutorialName, tutorialStepName, additionalParams });
         }
 
@@ -51,7 +50,6 @@ namespace Tabtale.TTPlugins
         /// <param name="additionalParams">Other additional parameters</param>
         public static void ReachedMainScreen(Dictionary<string, object> additionalParams)
         {
-            TTPLogger.Log("TTPGameProgression::ReachedMainScreen:");
             CallAnalyticsByReflection("ReachedMainScreen", new object[] { additionalParams });
         }
 
@@ -65,7 +63,6 @@ namespace Tabtale.TTPlugins
         /// <param name="additionalParams">Other additional parameters</param>
         public static void MissionStarted(string id, string name, string type, string missionStartedType, Dictionary<string, object> additionalParams)
         {
-            TTPLogger.Log("TTPGameProgression::MissionStarted:");
             DDNAEvents.MissionStarted(id, name, type, missionStartedType, additionalParams);
         }
 
@@ -75,7 +72,6 @@ namespace Tabtale.TTPlugins
         /// <param name="additionalParams">Other additional parameters</param>
         public static void MissionComplete(Dictionary<string, object> additionalParams)
         {
-            TTPLogger.Log("TTPGameProgression::MissionComplete:");
             DDNAEvents.MissionComplete(additionalParams);
         }
 
@@ -104,7 +100,6 @@ namespace Tabtale.TTPlugins
         /// <param name="additionalParams">Other additional parameters</param>
         public static void MissionAbandoned(Dictionary<string, object> additionalParams)
         {
-            TTPLogger.Log("TTPGameProgression::MissionAbandoned:");
             DDNAEvents.MissionAbandoned(additionalParams);
         }
 
@@ -114,7 +109,6 @@ namespace Tabtale.TTPlugins
         /// <param name="additionalParams">Other additional parameters</param>
         public static void MissionFailed(Dictionary<string, object> additionalParams)
         {
-            TTPLogger.Log("TTPGameProgression::MissionFailed:");
             DDNAEvents.MissionFailed(additionalParams);
         }
 
@@ -127,7 +121,6 @@ namespace Tabtale.TTPlugins
         /// <param name="additionalParams">Other additional parameters</param>
         public static void LevelUp(string skinName, string levelUpName, int level, Dictionary<string, object> additionalParams)
         {
-            TTPLogger.Log("TTPGameProgression::LevelUp:");
             UpdateCurrentLevel(level);
             DDNAEvents.LevelUp(skinName, levelUpName, level, additionalParams);
         }
@@ -148,7 +141,7 @@ namespace Tabtale.TTPlugins
             /// <param name="additionalParams">Other additional parameters</param>
             public static void MissionStarted(string id, string name, string type, string missionStartedType, Dictionary<string, object> additionalParams)
             {
-                Debug.Log(TTPLogger.LOGLabel + "TTPGameProgression::DDNAEvents:MissionStarted used from GameProgression plugin");
+                Debug.LogWarning("DDNAEvents:MissionStarted used from GameProgression plugin");
                 CallAnalyticsByReflection("MissionStarted", new object[] { id, name, type, missionStartedType, additionalParams });
             }
 
@@ -158,7 +151,8 @@ namespace Tabtale.TTPlugins
             /// <param name="additionalParams">Other additional parameters</param>
             public static void MissionComplete(Dictionary<string, object> additionalParams)
             {
-                Debug.Log(TTPLogger.LOGLabel + "TTPGameProgression::DDNAEvents:MissionComplete used from GameProgression plugin");
+                Debug.LogWarning("DDNAEventsMissionComplete used from GameProgression plugin");
+
                 AppsFlyerLevelComplete(additionalParams, "ddna");
                 CallAnalyticsByReflection("MissionComplete",
                     new object[] { TTPEvents.MISSION_COMPLETED, additionalParams });
@@ -170,7 +164,7 @@ namespace Tabtale.TTPlugins
             /// <param name="additionalParams">Other additional parameters</param>
             public static void MissionAbandoned(Dictionary<string, object> additionalParams)
             {
-                Debug.Log(TTPLogger.LOGLabel + "TTPGameProgression::DDNAEvents:MissionAbandoned used from GameProgression plugin");
+                Debug.LogWarning("DDNAEventsMissionAbandoned used from GameProgression plugin");
                 CallAnalyticsByReflection("MissionComplete",
                     new object[] { TTPEvents.MISSION_ABANDONED, additionalParams });
             }
@@ -181,7 +175,7 @@ namespace Tabtale.TTPlugins
             /// <param name="additionalParams">Other additional parameters</param>
             public static void MissionFailed(Dictionary<string, object> additionalParams)
             {
-                Debug.Log(TTPLogger.LOGLabel + "TTPGameProgression::DDNAEvents:MissionFailed used from GameProgression plugin");
+                Debug.LogWarning("DDNAEvents:MissionFailed used from GameProgression plugin");
                 CallAnalyticsByReflection("MissionComplete",
                     new object[] { TTPEvents.MISSION_FAILED, additionalParams });
             }
@@ -195,7 +189,7 @@ namespace Tabtale.TTPlugins
             /// <param name="additionalParams">Other additional parameters</param>
             public static void LevelUp(string skinName, string levelUpName, int level, Dictionary<string, object> additionalParams)
             {
-                Debug.Log(TTPLogger.LOGLabel + "TTPGameProgression::DDNAEvents:LevelUp used from GameProgression plugin");
+                Debug.LogWarning("DDNAEvents:LevelUp used from GameProgression plugin");
                 UpdateCurrentLevel(level);
 
                 CallAnalyticsByReflection("LevelUp", new object[] { skinName, levelUpName, level, additionalParams });
@@ -216,7 +210,7 @@ namespace Tabtale.TTPlugins
             /// <param name="additionalParams">Other additional parameters</param>
             public static void MissionStarted(int missionID, Dictionary<string, object> additionalParams)
             {
-                Debug.Log(TTPLogger.LOGLabel + "TTPGameProgression::FirebaseEvents:MissionStarted: missionID=" + missionID);
+                Debug.LogWarning("FirebaseEvents:MissionStarted: missionID=" + missionID);
                 CallAnalyticsByReflection("MissionStartedFirebase", new object[] { missionID, additionalParams });
             }
 
@@ -226,7 +220,7 @@ namespace Tabtale.TTPlugins
             /// <param name="additionalParams">Other additional parameters</param>
             public static void MissionComplete(Dictionary<string, object> additionalParams)
             {
-                Debug.Log(TTPLogger.LOGLabel + "TTPGameProgression::FirebaseEvents:MissionComplete:");
+                Debug.LogWarning("FirebaseEvents:MissionComplete:");
 
                 AppsFlyerLevelComplete(additionalParams,"firebase");
                 CallAnalyticsByReflection("MissionCompleteFirebase",
@@ -239,7 +233,7 @@ namespace Tabtale.TTPlugins
             /// <param name="additionalParams">Other additional parameters</param>
             public static void MissionAbandoned(Dictionary<string, object> additionalParams)
             {
-                Debug.Log(TTPLogger.LOGLabel + "TTPGameProgression::FirebaseEvents: MissionAbandoned:");
+                Debug.LogWarning("FirebaseEvents: MissionAbandoned:");
                 CallAnalyticsByReflection("MissionCompleteFirebase",
                     new object[] { TTPEvents.MISSION_ABANDONED, additionalParams });
             }
@@ -250,14 +244,14 @@ namespace Tabtale.TTPlugins
             /// <param name="additionalParams">Other additional parameters</param>
             public static void MissionFailed(Dictionary<string, object> additionalParams)
             {
-                Debug.Log(TTPLogger.LOGLabel + "TTPGameProgression::FirebaseEvents:MissionFailed:");
+                Debug.LogWarning("FirebaseEvents:MissionFailed:");
                 CallAnalyticsByReflection("MissionCompleteFirebase",
                     new object[] { TTPEvents.MISSION_FAILED, additionalParams });
             }
 
             public static void LevelUp(int level, Dictionary<string, object> additionalParams)
             {
-                Debug.Log(TTPLogger.LOGLabel + "TTPGameProgression::FirebaseEvents:LevelUp: level=" + level);
+                Debug.LogWarning("FirebaseEvents:LevelUp: level=" + level);
                 UpdateCurrentLevel(level);
                 
                 CallAnalyticsByReflection("LevelUpFirebase", new object[] { level, additionalParams });

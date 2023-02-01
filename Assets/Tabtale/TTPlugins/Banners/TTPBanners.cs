@@ -48,7 +48,6 @@ namespace Tabtale.TTPlugins
         /// <returns>True - if plugin is implemented</returns>
         public static bool Show()
         {
-            TTPLogger.Log("TTPBanners::Show:");
             if (Impl != null)
             {
                 return Impl.Show();
@@ -61,7 +60,6 @@ namespace Tabtale.TTPlugins
         /// <returns>True - if plugin is implemented</returns>
         public static bool Hide()
         {
-            TTPLogger.Log("TTPBanners::Hide:");
             if (Impl != null)
             {
                 return Impl.Hide();
@@ -74,7 +72,6 @@ namespace Tabtale.TTPlugins
         /// <returns>Current banner view height or 0 - if plugin is not implemented</returns>
         public static int GetAdHeight()
         {
-            TTPLogger.Log("TTPBanners::GetAdHeight:");
             if (Impl != null)
             {
                 return Impl.GetAdHeight();

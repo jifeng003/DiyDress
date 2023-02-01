@@ -56,12 +56,8 @@ public class LevelManager :Singleleton<LevelManager>
     if (Data.GetCurLevel == 0)
     {
       GameManager.Instance.jsonSave.TieRefresh();
-      SDK.OnMissionStarted(Data.GetCurLevel+1);
     }
-    else
-    {
-      SDK.OnMissionStarted(Data.GetCurLevel+1);
-    }
+    SDK.OnMissionStarted(Data.GetCurLevel+1);
     Instantiate(level[Data.GetCurLevel], Pos);
     
   }

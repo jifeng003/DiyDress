@@ -44,6 +44,7 @@ namespace Tabtale.TTPlugins
             Debug.Log("DownloadLocalConsentForm");
             string consentFormUrl = null;
             string privacyFormUrl = null;
+            string store = null;
             string jsonFp = Application.dataPath + STREAMING_ASSETS_PATH_JSON;
             if (File.Exists(jsonFp))
             {

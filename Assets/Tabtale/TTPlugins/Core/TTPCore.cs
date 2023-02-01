@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using UnityEngine.Scripting;
 
 #if UNITY_IOS
@@ -116,10 +115,6 @@ namespace Tabtale.TTPlugins {
             {
 
                 Debug.Log("TTPCore::Setup");
-#if TTP_DEV_MODE
-                TTPLogger.Create();
-#endif
-
                 IncludedServices = Resources.Load<TTPIncludedServicesScriptableObject>("ttpIncludedServices");
                 foreach (string clsName in CLASS_LIST)
                 {
@@ -166,14 +161,14 @@ namespace Tabtale.TTPlugins {
                     else 
                     {
                         Debug.Log("TTPCore::Setup: shouldn't ask for IDFA");
-#if TTP_ANALYTICS && !TTP_DEV_MODE
-                        SendAttDidShowAnalyticsEvent();
-#endif
                     }
                 }
 #endif
                 InitDeltaDnaAgent();
                 InitBilling();
+#if TTP_UNITY_NATIVE_ADS
+                InitUnityNativeAds();
+#endif
 #if TTP_GAMEPROGRESSION
                 InitGameProgression();
 #endif
@@ -194,46 +189,6 @@ namespace Tabtale.TTPlugins {
             }
         }
 
-#if TTP_ANALYTICS && !TTP_DEV_MODE
-        private const string attDidShowKey = "attDidShow";
-#if UNITY_IOS && !UNITY_EDITOR
-        [DllImport("__Internal")]
-        private static extern bool ttpGetAttDidShowFlag();
-        [DllImport("__Internal")]
-        private static extern void ttpSetAttDidShowFlag();
-#endif
-        private static void SendAttDidShowAnalyticsEvent()
-        {
-#if UNITY_IOS && !UNITY_EDITOR
-            if (ttpGetAttDidShowFlag())
-            {
-                return;
-            }
-            Debug.Log("TTPCore::SendAttDidShowAnalyticsEvent:");
-            System.Type analytics = System.Type.GetType("Tabtale.TTPlugins.TTPAnalytics");
-            if (analytics != null)
-            {
-                MethodInfo method = analytics.GetMethod("AttDidShow", BindingFlags.NonPublic | BindingFlags.Static);
-                if (method != null)
-                {
-                    Dictionary<string, object> addParams = new Dictionary<string, object>();
-                    addParams["result"] = "restricted";
-                    method.Invoke(null, new object[] { addParams });
-                }
-                else
-                {
-                    Debug.LogWarning("TTPCore::SendAttDidShowAnalyticsEvent: method AttDidShow not found");
-                }
-            }
-            else
-            {
-                Debug.Log("TTPCore::SendAttDidShowAnalyticsEvent: TTPAnalytics not found");
-            }
-            ttpSetAttDidShowFlag();
-#endif
-        }
-#endif
-        
 #if TTP_OPENADS && TTP_DEV_MODE
         private static void NotifyOpenAdsFinished()
         {
@@ -440,6 +395,30 @@ namespace Tabtale.TTPlugins {
                 Debug.Log("TTPCore::InitDeltaDnaAgent: TTPDeltaDnaAgent not found");
             }
         }
+
+#if TTP_UNITY_NATIVE_ADS
+        private static void InitUnityNativeAds()
+        {
+            Debug.Log("TTPCore::InitUnityNativeAds:");
+            System.Type unityNativeAds = System.Type.GetType("Tabtale.TTPlugins.TTPUnityNativeAds");
+            if (unityNativeAds != null)
+            {
+                MethodInfo method = unityNativeAds.GetMethod("InternalInit", BindingFlags.NonPublic | BindingFlags.Static);
+                if (method != null)
+                {
+                    method.Invoke(null, null);
+                }
+                else
+                {
+                    Debug.LogWarning("TTPCore::InitUnityNativeAds: method InternalInit not found");
+                }
+            }
+            else
+            {
+                Debug.Log("TTPCore::InitUnityNativeAds: TTPUnityNativeAds not found");
+            }
+        }
+#endif
 
 #if TTP_GAMEPROGRESSION
         private static void InitGameProgression()

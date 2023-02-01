@@ -29,7 +29,6 @@ namespace Tabtale.TTPlugins
 
         public static void Button()
         {
-            TTPLogger.Log("TTPRateUs::Button:");
             if (TTPCore.IncludedServices != null && !TTPCore.IncludedServices.rateUs)
             {
                 return;
@@ -49,7 +48,6 @@ namespace Tabtale.TTPlugins
 
         public static void Popup()
         {
-            TTPLogger.Log("TTPRateUs::Popup:");
             if (TTPCore.IncludedServices != null && !TTPCore.IncludedServices.rateUs)
             {
                 return;

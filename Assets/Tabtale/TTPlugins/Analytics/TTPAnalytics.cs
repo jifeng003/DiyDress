@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Scripting;
-using System.Linq;
 #if UNITY_IOS
 using System.Runtime.InteropServices;
 #endif
@@ -80,7 +79,6 @@ namespace Tabtale.TTPlugins
         ///  Do not call this method before you received #OnRemoteFetchCompletedEvent </summary>
         public static string GetStringValue(string key)
         {
-            TTPLogger.Log("TTPAnalytics::GetStringValue:key=" + key);
             if (_overrideConfig != null && _overrideConfig.ContainsKey(key))
             {
                 return (string)_overrideConfig[key];
@@ -94,18 +92,9 @@ namespace Tabtale.TTPlugins
             return "";
         }
 
-        public static void SetUserProperties(Dictionary<string, string> properties) 
-        {
-            if (Impl != null)
-            {
-                Impl.SetUserProperties(properties);
-            }
-        }
-
         /// <summary>(Firebase) - Check if remote fetch is complete #OnRemoteFetchCompletedEvent </summary>
         public static bool IsRemoteFetchComplete()
         {
-            TTPLogger.Log("TTPAnalytics::IsRemoteFetchComplete:");
             if (Impl != null)
             {
                 return Impl.IsRemoteFetchComplete();
@@ -127,7 +116,6 @@ namespace Tabtale.TTPlugins
         /// </summary>
         public static bool GetRemoteValue(string key, System.Action<string> onRequestValueResponseAction, double timeout = 4.0)
         {
-            TTPLogger.Log("TTPAnalytics::GetRemoteValue:key=" + key);
             if (!TTPCore.IsRemoteConfigExistAndEnabled())
             {
                 Debug.Log("GetRemoteValue:: remoteconfig doesn't exist");
@@ -174,7 +162,6 @@ namespace Tabtale.TTPlugins
         [Preserve]
         public static bool GetRemoteValueDictionary(IList<string> keys, System.Action<IDictionary<string, object>> onRequestValueDictionaryResponseAction, double timeout = 4.0)
         {
-            TTPLogger.Log("TTPAnalytics::GetRemoteValueDictionary:");
             if (!TTPCore.IsRemoteConfigExistAndEnabled())
             {
                 Debug.Log("GetRemoteValueDictionary:: remoteconfig doesn't exist");
@@ -216,7 +203,6 @@ namespace Tabtale.TTPlugins
 
         public static void SetGetUserScoreDelegate(GetUserScoreDelegate getUserScoreDelegate)
         {
-            TTPLogger.Log("TTPAnalytics::SetGetUserScoreDelegate:");
             _getUserScoreDelegate = getUserScoreDelegate;
         }
 
@@ -228,7 +214,6 @@ namespace Tabtale.TTPlugins
         [Preserve]
         public static void LogEvent(long targets, string eventName, IDictionary<string, object> eventParams, bool timed, bool ttpInternal = false)
         {
-            TTPLogger.Log("TTPAnalytics::LogEvent:eventName=" + eventName);
             if (Impl != null)
                 Impl.LogEvent(targets, eventName, eventParams, timed, ttpInternal);
         }
@@ -238,7 +223,6 @@ namespace Tabtale.TTPlugins
         /// <param name="eventParams">additional params to the event</param>
         public static void EndLogEvent(string eventName, IDictionary<string, object> eventParams)
         {
-            TTPLogger.Log("TTPAnalytics::EndLogEvent:eventName=" + eventName);
             if (Impl != null)
                 Impl.EndLogEvent(eventName, eventParams);
         }
@@ -250,7 +234,7 @@ namespace Tabtale.TTPlugins
         /// <param name="timeout">timeout in seconds to wait for the decision point engagement response</param>
         public static bool CallDecisionPoint(string decisionPoint, Dictionary<string, object> parameters, System.Action<string, Dictionary<string,object>> onDecisionPointResponseAction, double timeout = 4.0)
         {
-            Debug.Log(TTPLogger.LOGLabel + "TTPAnalytics::CallDecisionPoint:decisionPoint=" + decisionPoint);
+            Debug.Log("TTPAnalytics::CallDecisionPoint:decisionPoint=" + decisionPoint);
             _onDecisionPointResponseAction = onDecisionPointResponseAction;
             Debug.LogWarning("TTPAnalytics::CallDecisionPoint: could not find class TTPDeltaDnaAgent");
             System.Reflection.MethodInfo method = typeof(TTPCore).GetMethod("GetTTPGameObject", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
@@ -272,7 +256,6 @@ namespace Tabtale.TTPlugins
 
         public static void GetGeoCodeWhenReady(Action<string> callback)
         {
-            TTPLogger.Log("TTPAnalytics::GetGeoCodeWhenReady:");
             _getGeoCallback = callback;
             if (Impl != null)
             {
@@ -282,7 +265,6 @@ namespace Tabtale.TTPlugins
 
         public static Dictionary<string, object> GetAdditionalParams()
         {
-            TTPLogger.Log("TTPAnalytics::GetAdditionalParams:");
             if (Impl != null)
             {
                 var str = Impl.GetAdditionalParams();
@@ -300,7 +282,7 @@ namespace Tabtale.TTPlugins
         /// <param name="decisionPoint">the name of the decisionPoint. (Should be configured in DDNA)</param>
         public static bool ShowImageMessage(string decisionPoint)
         {
-            Debug.Log(TTPLogger.LOGLabel + "TTPAnalytics::ShowImageMessage:decisionPoint=" + decisionPoint);
+            Debug.Log("TTPAnalytics::ShowImageMessage:decisionPoint=" + decisionPoint);
             return false;
         }
 
@@ -318,7 +300,7 @@ namespace Tabtale.TTPlugins
                                           IDictionary<string, object> productsSpent,
                                           IDictionary<string, object> otherEventParams)
         {
-            Debug.Log(TTPLogger.LOGLabel + "TTPAnalytics::LogTransaction: transactionName=" + transactionName);
+            Debug.Log("TTPAnalytics::LogTransaction: transactionName=" + transactionName);
             if (Impl != null){
                 Dictionary<string, object> log = new Dictionary<string, object>();
                 log["transactionName"] = transactionName ?? "transaction";
@@ -583,15 +565,6 @@ namespace Tabtale.TTPlugins
         }
         
         [Preserve]
-        static void AttDidShow(Dictionary<string, object> additionalParams)
-        {
-            if (Impl != null) {
-                Impl.LogEvent(AnalyticsTargets.ANALYTICS_TARGET_DELTA_DNA | AnalyticsTargets.ANALYTICS_TARGET_FIREBASE,
-                    TTPEvents.ATT_DID_SHOW, additionalParams, false, false);
-            }
-        }
-        
-        [Preserve]
         private static void TriggerOnDeltaDnaReady(bool isReady, string userId)
         {
             Debug.Log("TTPAnalytics::TriggerOnDeltaDnaReady");
@@ -696,7 +669,6 @@ namespace Tabtale.TTPlugins
             void DdnaIsReady(bool isReady, string userId);
             void GetGeo();
             string GetAdditionalParams();
-            void SetUserProperties(Dictionary<string, string> properties);
         }
 
 #if UNITY_IOS && !TTP_DEV_MODE
@@ -740,9 +712,6 @@ namespace Tabtale.TTPlugins
 
             [DllImport("__Internal")]
             private static extern string ttpGetAdditionalParams();
-
-            [DllImport("__Internal")]
-            private static extern void ttpSetUserProperties([In, Out] string[] keysArray, [In, Out] string[] valuesArray, int size);
 
             public void LogEvent(long targets, string eventName, IDictionary<string, object> eventParams, bool timed, bool ttpInternal)
             {
@@ -811,11 +780,6 @@ namespace Tabtale.TTPlugins
             public string GetAdditionalParams()
             {
                 return ttpGetAdditionalParams();
-            }
-
-            public void SetUserProperties(Dictionary<string, string> properties) 
-            {
-                ttpSetUserProperties(properties.Keys.ToArray(), properties.Values.ToArray(), properties.Count);
             }
         }
 #endif
@@ -962,14 +926,6 @@ namespace Tabtale.TTPlugins
                 }
                 return null;
             }
-            
-            public void SetUserProperties(Dictionary<string, string> properties)
-            {
-                if (ServiceJavaObject != null)
-                {
-                    ServiceJavaObject.Call("setUserProperties", properties.Keys.ToArray(), properties.Values.ToArray());
-                }
-            }
         }
 #endif
         private class EditorImpl : IAnalytics
@@ -1072,11 +1028,6 @@ namespace Tabtale.TTPlugins
             public string GetAdditionalParams()
             {
                 return "{\"fakeAdditionalParams\":\"howdy\"}";
-            }
-
-            public void SetUserProperties(Dictionary<string, string> properties) 
-            {
-                 Debug.Log("TTPAnalytics::EditorImpl::SetUserProperties");
             }
         }
 

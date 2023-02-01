@@ -27,7 +27,6 @@ namespace Tabtale.TTPlugins
 
         public static bool Show(string location, System.Action<bool, TTPILRDData> onResultAction, bool force)
         {
-            TTPLogger.Log("TTPRewardedInterstitials::Show:location=" + location);
             _onResultActionILRD = onResultAction;
             if (Impl != null)
             {
@@ -45,7 +44,6 @@ namespace Tabtale.TTPlugins
 
         public static bool IsReady(bool force)
         {
-            TTPLogger.Log("TTPRewardedInterstitials::IsReady:");
             if (Impl != null)
             {
                 return Impl.IsReady(force);
@@ -55,7 +53,6 @@ namespace Tabtale.TTPlugins
 
         public static void NotifyPopupShown()
         {
-            TTPLogger.Log("TTPRewardedInterstitials::NotifyPopupShown:");
             if (Impl != null)
             {
                 Impl.PopupShown();
@@ -64,7 +61,6 @@ namespace Tabtale.TTPlugins
 
         public static void NotifyPopupCancelled()
         {
-            TTPLogger.Log("TTPRewardedInterstitials::NotifyPopupCancelled:");
             if (Impl != null)
             {
                 Impl.PopupCancelled();

@@ -63,19 +63,16 @@ namespace Tabtale.TTPlugins
 
         public static bool ShouldShow(string source)
         {
-            TTPLogger.Log("TTPPopupMgr::ShouldShow:source=" + source);
             return Impl.ShouldShow(source);
         }
 
         public static void OnShown(string source)
         {
-            TTPLogger.Log("TTPPopupMgr::OnShown:source=" + source);
             Impl.OnShown(source);
         }
 
         public static void OnClosed(string source)
         {
-            TTPLogger.Log("TTPPopupMgr::OnClosed:source=" + source);
             Impl.OnClosed(source);
         }
 

@@ -63,7 +63,6 @@ namespace Tabtale.TTPlugins
         /// <param name="eventParams">Parameters dictionary logging with event</param>
 		public static void LogEvent(string eventName, IDictionary<string, object> eventParams)
 		{
-			TTPLogger.Log("TTPAppsFlyer::LogEvent:eventName=" + eventName);
 			if (Impl != null)
 				Impl.LogEvent(eventName, eventParams);
 		}

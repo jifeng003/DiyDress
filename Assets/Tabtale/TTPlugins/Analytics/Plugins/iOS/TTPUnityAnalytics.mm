@@ -195,21 +195,6 @@ extern "C" {
         return strdup("");
     }
     
-    void ttpSetUserProperties(char** ppKeysArray, char** ppValuesArray, int size)
-    {
-        TTPServiceManager *serviceManager = [TTPUnityServiceManager sharedInstance];
-        id<TTPIanalytics> analyticsService = [serviceManager get:@protocol(TTPIanalytics)];
-        if(analyticsService != nil){
-            id properties = [NSMutableDictionary new];
-            for (int i = 0; i < size; i++) {
-                NSString* key = @(ppKeysArray[i]);
-                NSString* value = @(ppValuesArray[i]);
-                properties[key] = value;
-            }
-            [analyticsService setUserProperties:properties];
-        }
-    }
-    
 }
 
 @end

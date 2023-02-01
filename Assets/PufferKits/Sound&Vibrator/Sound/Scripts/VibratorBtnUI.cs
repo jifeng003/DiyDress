@@ -46,7 +46,11 @@ public class VibratorBtnUI : MonoBehaviour
 
     private void UpdateInfo(bool isVibratorEnable)
     {
-        btnImg.sprite = null;
+        if (btnImg.sprite != null)
+        {
+            btnImg.sprite = null;
+        }
+        
         btnImg.sprite = isVibratorEnable ? vibratorOnSprite : vibratorOffSprite;
         // vibratorOn.gameObject.SetActive(vibratoron);
         //vibratorOff.gameObject.SetActive(!vibratoron);
